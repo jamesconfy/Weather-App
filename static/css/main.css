@@ -1,0 +1,13 @@
+.foo {
+	display: block;
+	text-align: center;
+}
+
+.foo ul {
+	list-style: none;
+	display: inline-flex;
+}
+
+.foo ul li {
+    margin: 0px 3px;
+}
