@@ -1,20 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
-<div>
-    <div>
-        <h2>Weather App</h2>
-        <form action="" method="POST">
-            {{ form.hidden_tag() }}
-            <fieldset>
-                <div>
-                    {{ form.city.label }} 
-                    {{ form.city }} 
-                </div>
-            </fieldset>
+<div class="container">
+    <h2>Weather App</h2>
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <fieldset>
             <div>
-                {{ form.submit }}
-            <div>
-        </form>
-    </div>
+                {{ form.city.label }}
+                {{ form.city }}
+            </div>
+        </fieldset>
+        <div>
+            {{ form.submit }}
+        </div>
+    </form>
 </div>
 {% endblock content %}
