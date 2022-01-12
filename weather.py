@@ -70,7 +70,3 @@ async def forecast():
 
         flash(f'City, {city} is not found in our database. Please enter another City', 'danger')
     return render_template('forecast.html', form=form, title='Weather Forecast')
-
-
-if __name__ == "__main__":
-    app.run(debug=True, port=8080, host="localhost")
