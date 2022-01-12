@@ -5,9 +5,9 @@ from forms import CurrentWeatherForm
 from utils import ms_to_date
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'hafdgjhluerhadj'
-BASE_URL = 'http://api.openweathermap.org/data/2.5'
-API_key = "d228a089b08406745e52568262b60f83"
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+BASE_URL = os.environ.get("BASE_URL")
+API_KEY = os.environ.get("API_KEY")
 
 @app.route('/')
 @app.route('/home')
@@ -22,7 +22,7 @@ def current():
         city = form.city.data
         try:
             api = requests.get(
-                f'{BASE_URL}/weather?q={city}&units=metric&appid={API_key}')
+                f'{BASE_URL}/weather?q={city}&units=metric&appid={API_KEY}')
             data = api.json()
             if data["cod"] != "404":
                 dt = ms_to_date(data.get("dt"), data.get("timezone"))
@@ -50,7 +50,7 @@ def forecast():
     if request.method == 'POST':
         city = form.city.data
         try:
-            api1 = requests.get(f'{BASE_URL}/weather?q={city}&appid={API_key}')
+            api1 = requests.get(f'{BASE_URL}/weather?q={city}&appid={API_KEY}')
             data1 = api1.json()
             if data1["cod"] != "404":
 
@@ -60,7 +60,7 @@ def forecast():
                 unit = "metric"
 
                 api = requests.get(
-                    f'{BASE_URL}/onecall?lat={lat}&lon={lon}&units={unit}&exclude={part}&appid={API_key}')
+                    f'{BASE_URL}/onecall?lat={lat}&lon={lon}&units={unit}&exclude={part}&appid={API_KEY}')
                 data = api.json()
 
                 dt = ms_to_date(data["current"]["dt"],
