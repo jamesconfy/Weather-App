@@ -7,16 +7,16 @@ from utils import ms_to_date
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hafdgjhluerhadj'
 BASE_URL = 'http://api.openweathermap.org/data/2.5'
-API_key = os.environ.get('API_key')
+API_key = "d228a089b08406745e52568262b60f83"
 
 @app.route('/')
 @app.route('/home')
-async def home():
+def home():
     return render_template("home.html")
 
 
 @app.route('/current', methods=['POST', 'GET'])
-async def current():
+def current():
     form = CurrentWeatherForm()
     if request.method == 'POST':
         city = form.city.data
@@ -40,7 +40,7 @@ async def current():
     return render_template('current.html', form=form, title='Current Weather')
 
 @app.route('/forecast', methods=['POST', 'GET'])
-async def forecast():
+def forecast():
     form = CurrentWeatherForm()
     if request.method == 'POST':
         city = form.city.data
