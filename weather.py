@@ -7,7 +7,7 @@ from utils import ms_to_date
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hafdgjhluerhadj'
 BASE_URL = 'http://api.openweathermap.org/data/2.5'
-API_key = os.environ.get("API_key")
+API_key = "d228a089b08406745e52568262b60f83"
 
 @app.route('/')
 @app.route('/home')
@@ -21,7 +21,8 @@ def current():
     if request.method == 'POST':
         city = form.city.data
         try:
-            api = requests.get(f'{BASE_URL}/weather?q={city}&units=metric&appid={API_key}')
+            api = requests.get(
+                f'{BASE_URL}/weather?q={city}&units=metric&appid={API_key}')
             data = api.json()
             if data["cod"] != "404":
                 dt = ms_to_date(data.get("dt"), data.get("timezone"))
@@ -34,9 +35,14 @@ def current():
 
         except requests.exceptions.HTTPError as err:
             return f'Error: {err}'
-        
-        flash(f'City, {city} is not found in our database. Please enter another City', 'danger')
+
+        except requests.exceptions.MissingSchema as err:
+            return f'Error: {err}'
+
+        flash(
+            f'City, {city} is not found in our database. Please enter another City', 'danger')
     return render_template('current.html', form=form, title='Current Weather')
+
 
 @app.route('/forecast', methods=['POST', 'GET'])
 def forecast():
@@ -53,12 +59,16 @@ def forecast():
                 part = "daily,hourly"
                 unit = "metric"
 
-                api = requests.get(f'{BASE_URL}/onecall?lat={lat}&lon={lon}&units={unit}&exclude={part}&appid={API_key}')
+                api = requests.get(
+                    f'{BASE_URL}/onecall?lat={lat}&lon={lon}&units={unit}&exclude={part}&appid={API_key}')
                 data = api.json()
 
-                dt = ms_to_date(data["current"]["dt"], data.get("timezone_offset"))
-                sr = ms_to_date(data["current"]["sunrise"], data.get("timezone_offset"))
-                ss = ms_to_date(data["current"]["sunset"], data.get("timezone_offset"))
+                dt = ms_to_date(data["current"]["dt"],
+                                data.get("timezone_offset"))
+                sr = ms_to_date(data["current"]["sunrise"],
+                                data.get("timezone_offset"))
+                ss = ms_to_date(data["current"]["sunset"],
+                                data.get("timezone_offset"))
                 return render_template('view_data_fore.html', data=data, title="Current Forecast", legend='Forecast Weather', dt=dt, sr=sr, ss=ss)
 
         except requests.exceptions.ConnectionError as err:
@@ -67,5 +77,9 @@ def forecast():
         except requests.exceptions.HTTPError as err:
             return f'Error: {err}'
 
-        flash(f'City, {city} is not found in our database. Please enter another City', 'danger')
+        except requests.exceptions.MissingSchema as err:
+            return f'Error: {err}'
+
+        flash(
+            f'City, {city} is not found in our database. Please enter another City', 'danger')
     return render_template('forecast.html', form=form, title='Weather Forecast')
