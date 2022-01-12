@@ -41,7 +41,18 @@
                 </ul>
             </div>
             <div class="col-md-10 col-sm-12">
-                {% block content %} {% endblock %}
+                <div>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, msg in messages %}
+                    <div class="alert alert-{{ category}}">
+                        <p>{{msg}}</p>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    {% block content %} {% endblock %}
+                </div>
             </div>
             <div class="col-md-1 col-sm-12"></div>
         </div>
@@ -51,10 +62,11 @@
         <div class="container">
             <div class="foo">
                 <ul>
-                    <li>Whatsapp</li>
-                    <li>Twitter</li>
-                    <li>Instagram</li>
-                    <li>Facebook</li>
+                    <li><a href="https://wa.me/2348149795370" target="_blank">Whatsapp</a></li>
+                    <li><a href="https://twitter.com/jamesconfy" target="_blank">Twitter</a></li>
+                    <li><a href="https://instagram.com/jconfy" target="_blank">Instagram</a></li>
+                    <li><a href="https://www.facebook.com/jamesconfy8" target="_blank">Facebook</a></li>
+                    <li><a href="https://t.me/jamesconfy" target="_blank">Telegram</a></li>
                 </ul>
             </div>
         </div>

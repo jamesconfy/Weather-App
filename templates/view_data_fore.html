@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <h1>{{ legend }}</h1>
+    <p>Latitude: {{ data.lat }}</p>
+    <p>Longitude: {{ data.lon }}</p>
+    <p>Data Receiving Time: {{ dt.strftime("%H:%M:%S, %d/%m/%Y") }}</p>
+    <p>Time Zone: {{ data.timezone }}</p>
+    <p>Time Zone Offset: {{ data.timezone_offset }}</p>
+    <p>Sunrise: {{ sr.strftime("%H:%M:%S, %d/%m/%Y") }}</p>
+    <p>Sunset: {{ ss.strftime("%H:%M:%S, %d/%m/%Y") }}</p>
+    <p>Visibility: {{ data.current.visibility }}</p>
+    <p>Amount of Clouds: {{ data.current.clouds }}</p>
+    <p>Cloud Description: {{ data.current.weather.0.description }}</p>
+    <p>Dew Points: {{ data.current.dew_point }}</p>
+    <p>Wind Degree: {{ data.current.wind_deg }}</p>
+    <p>Wind Gust: {{ data.current.wind_gust }}</p>
+    <p>Wind Speed: {{ data.current.wind_speed }} m/s</p>
+    <p>Feels Like: {{ data.current.feels_like }}</p>
+    <p>Humidity: {{ data.current.humidity }}</p>
+    <p>Pressure: {{ data.current.pressure }} mmHG</p>
+    <p>Temperature: {{ data.current.temp }} C</p>
+    <p>UV index: {{ data.current.uvi }}</p>
+</div>
+{% endblock content %}
