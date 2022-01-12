@@ -14,12 +14,12 @@
     <p>Cloud Description: {{ data.weather.0.description }}</p>
     <p>Wind Degree: {{ data.wind.deg }}</p>
     <p>Wind Gust: {{ data.wind.gust }}</p>
-    <p>Wind Speed: {{ data.wind.speed }}</p>
+    <p>Wind Speed: {{ data.wind.speed }} m/s</p>
     <p>Feels Like: {{ data.main.feels_like }}</p>
     <p>Ground Level: {{ data.main.grnd_level }}</p>    
+    <p>Temperature: {{ data.main.temp }} C</p>
     <p>Humidity: {{ data.main.humidity }}</p>
-    <p>Pressure: {{ data.main.pressure }}</p>
+    <p>Pressure: {{ data.main.pressure }} mmHG</p>
     <p>Sea Level: {{ data.main.sea_level }}</p>
-    <p>Temperature: {{ data.main.temperature }}</p>
 </div>
 {% endblock content %}

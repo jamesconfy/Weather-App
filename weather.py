@@ -7,12 +7,12 @@ from utils import ms_to_date
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hafdgjhluerhadj'
 BASE_URL = 'http://api.openweathermap.org/data/2.5'
-API_key = "d228a089b08406745e52568262b60f83"
+API_key = os.environ.get("API_key")
 
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template("home.html")
+    return render_template("home.html", title="Home")
 
 
 @app.route('/current', methods=['POST', 'GET'])
@@ -21,10 +21,9 @@ def current():
     if request.method == 'POST':
         city = form.city.data
         try:
-            api = requests.get(f'{BASE_URL}/weather?q={city}&appid={API_key}')
+            api = requests.get(f'{BASE_URL}/weather?q={city}&units=metric&appid={API_key}')
             data = api.json()
             if data["cod"] != "404":
-
                 dt = ms_to_date(data.get("dt"), data.get("timezone"))
                 sr = ms_to_date(data["sys"]["sunrise"], data.get("timezone"))
                 ss = ms_to_date(data["sys"]["sunset"], data.get("timezone"))
