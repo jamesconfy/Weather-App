@@ -1,11 +1,10 @@
-from flask import Flask, render_template, request, flash
+from flask import render_template, request, flash
 import requests
 import os
-from forms import CurrentWeatherForm
-from utils import ms_to_date
+from weather_app import app
+from weather_app.forms import CurrentWeatherForm
+from weather_app.utils import ms_to_date
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 BASE_URL = os.environ.get("BASE_URL")
 API_KEY = os.environ.get("API_KEY")
 
