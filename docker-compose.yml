@@ -1,13 +1,14 @@
-version: '3.4'
+version: '3.9'
 
 services:
   weatherapp:
-    container_name: weather-app
-    image: weather-app
+    container_name: weatherapp
+    image: weatherapp
     build:
       context: .
       dockerfile: ./Dockerfile
     ports:
-      - 5001:5001
+      - 5004:5004
     env_file:
       - .env
+
