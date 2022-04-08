@@ -1,7 +1,7 @@
 from flask import render_template, request, flash
+from flask import current_app as app
 import requests
 import os
-from weather_app import app
 from weather_app.forms import CurrentWeatherForm
 from weather_app.utils import ms_to_date
 
@@ -29,13 +29,13 @@ def current():
                 ss = ms_to_date(data["sys"]["sunset"], data.get("timezone"))
                 return render_template('view_data_current.html', data=data, title="Current Weather", legend='Current Weather', dt=dt, sr=sr, ss=ss)
 
-        except requests.exceptions.ConnectionError as err:
+        except requests.exceptions.ConnectionError as err: #pragma: no cover
             return f'Error: {err}'
 
-        except requests.exceptions.HTTPError as err:
+        except requests.exceptions.HTTPError as err: #pragma: no cover
             return f'Error: {err}'
 
-        except requests.exceptions.MissingSchema as err:
+        except requests.exceptions.MissingSchema as err: #pragma: no cover
             return f'Error: {err}'
 
         flash(
@@ -70,13 +70,13 @@ def forecast():
                                 data.get("timezone_offset"))
                 return render_template('view_data_fore.html', data=data, title="Current Forecast", legend='Forecast Weather', dt=dt, sr=sr, ss=ss)
 
-        except requests.exceptions.ConnectionError as err:
+        except requests.exceptions.ConnectionError as err: #pragma: no cover
             return f'Error: {err}'
 
-        except requests.exceptions.HTTPError as err:
+        except requests.exceptions.HTTPError as err: #pragma: no cover
             return f'Error: {err}'
 
-        except requests.exceptions.MissingSchema as err:
+        except requests.exceptions.MissingSchema as err: #pragma: no cover
             return f'Error: {err}'
 
         flash(
