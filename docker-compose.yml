@@ -11,4 +11,4 @@ services:
       - 5004:5004
     env_file:
       - .env
-
+    restart: always
