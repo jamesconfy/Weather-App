@@ -1,17 +1,14 @@
 version: 2.1
 
-workflows:
-  myworkspace:
-    jobs:
-      - save_hello_to_output
-      - print_output_file:
-          requires:
-            - save_hello_to_output
+defaults:
+  docker:
+    - image:  circleci/node:13.8.0
+  root: ~/
+  file: ~/output.txt
 
 jobs:
   save_hello_to_output:
-    docker:
-      - image: circleci/node:13.8.0
+    <<: *docker
     steps:
       - run: echo "this is my text" > ~/output.txt
       - persist_to_workspace:
@@ -20,9 +17,16 @@ jobs:
             - output.txt
 
   print_output_file:
-    docker:
-      - image: circleci/node:13.8.0
+    <<: *docker
     steps:
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
+
+workflows:
+  myworkspace:
+    jobs:
+      - save_hello_to_output
+      - print_output_file:
+          requires:
+            - save_hello_to_output
