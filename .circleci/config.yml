@@ -36,6 +36,17 @@ jobs:
     steps:
       - print_pipeline_id
 
+  job_fails:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: cat /~output.txt
+      - run:
+          name: It will fail
+          when: on_fail
+
 workflows:
   myworkspace:
     jobs:
@@ -44,3 +55,4 @@ workflows:
           requires:
             - save_hello_to_output
       - print_pipeline_id
+      - job_fails
