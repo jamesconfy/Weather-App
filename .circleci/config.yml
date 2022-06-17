@@ -6,11 +6,14 @@ orbs:
   welcome: circleci/welcome-orb@0.4.1
 # Orchestrate or schedule a set of jobs
 jobs:
-  print_hello:
+  build:
     docker:
-      - image: circleci/node:13.8.0
+      - image: circleci/python:3.10.1
+
+  print_hello:
     steps:
-      - run: echo $NAME
+      - run: I am going to print my name to the terminal
+      - run: print($NAME)
   print_world:
     docker:
       - image: circleci/node:13.8.0
