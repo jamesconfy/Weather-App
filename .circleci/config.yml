@@ -40,10 +40,10 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "That is me" > output.txt
+      - run: exit 1
       - run:
           name: It will fail
-          command: 
+          command: echo "Hello Error"
           when: on_fail
 
 workflows:
