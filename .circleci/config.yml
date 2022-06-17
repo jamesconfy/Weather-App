@@ -3,7 +3,6 @@ version: 2.1
 workflows:
   myworkspace:
     jobs:
-      - build
       - save_hello_to_output
       - print_output_file
 
