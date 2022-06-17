@@ -11,7 +11,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: cimg/base:2020.01
+      - image: circleci/node:13.8.0
     steps:
       - run:
           name: "echo an env var that is part of our project"
@@ -20,7 +20,7 @@ jobs:
 
   save_hello_to_output:
     docker:
-      - image: cimg/base:2020.01
+      - image: circleci/node:13.8.0
     steps:
       - run: echo "this is my text" > /~output.txt
       - persist_to_workspace:
@@ -29,7 +29,7 @@ jobs:
 
   print_output_file:
     docker:
-      - image: cimg/base:2020.01
+      - image: circleci/node:13.8.0
     steps:
       - checkout 
       - attach_workspace:
