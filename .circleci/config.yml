@@ -9,15 +9,6 @@ workflows:
 
 
 jobs:
-  build:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run:
-          name: "echo an env var that is part of our project"
-          command: |
-            echo $NAME
-
   save_hello_to_output:
     docker:
       - image: circleci/node:13.8.0
@@ -31,7 +22,6 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - checkout 
       - attach_workspace:
           at: ~/
-      - run: cat output.txt
+      - run: cat ~/output.txt
