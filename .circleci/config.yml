@@ -43,3 +43,4 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_to_output
+      - print_pipeline_id
