@@ -4,8 +4,9 @@ workflows:
   myworkspace:
     jobs:
       - save_hello_to_output
-      - print_output_file
-
+      - print_output_file:
+          requires:
+            - save_hello_to_output
 
 jobs:
   save_hello_to_output:
