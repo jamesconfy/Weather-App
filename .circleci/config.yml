@@ -8,7 +8,8 @@ defaults: &defaults
 
 jobs:
   save_hello_to_output:
-    <<: *defaults
+    docker:
+    - image:  circleci/node:13.8.0
     steps:
       - run: echo "this is my text" > ~/output.txt
       - persist_to_workspace:
@@ -17,7 +18,8 @@ jobs:
             - output.txt
 
   print_output_file:
-    <<: *defaults
+    docker:
+    - image:  circleci/node:13.8.0
     steps:
       - attach_workspace:
           at: ~/
