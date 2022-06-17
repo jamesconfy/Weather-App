@@ -6,10 +6,15 @@ defaults: &defaults
   root: ~/
   file: ~/output.txt
 
+commands:
+  print_pipeline_id:
+    steps:
+      - run: echo ${CIRCLE_WORKFLOW_ID}
+
 jobs:
   save_hello_to_output:
     docker:
-    - image:  circleci/node:13.8.0
+      - image:  circleci/node:13.8.0
     steps:
       - run: echo "this is my text" > ~/output.txt
       - persist_to_workspace:
@@ -19,11 +24,17 @@ jobs:
 
   print_output_file:
     docker:
-    - image:  circleci/node:13.8.0
+      - image:  circleci/node:13.8.0
     steps:
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
+
+  print_pipeline_id:
+    docker:
+      - image:  circleci/node:13.8.0
+    steps:
+      - print_pipeline_id
 
 workflows:
   myworkspace:
