@@ -11,6 +11,8 @@ jobs:
       - image: circleci/python:3.10.1
 
   print_hello:
+    docker:
+      - image: circleci/python:3.10.1
     steps:
       - run: I am going to print my name to the terminal
       - run: print($NAME)
