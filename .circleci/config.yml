@@ -5,15 +5,15 @@ workflows:
     jobs:
       - build
       - save_hello_to_output
-      - print_output_file
-      
+      - print_output_file:
+          requires: save_hello_to_output
+
 
 jobs:
   build:
     docker:
       - image: cimg/base:2020.01
     steps:
-      - checkout
       - run:
           name: "echo an env var that is part of our project"
           command: |
@@ -23,7 +23,6 @@ jobs:
     docker:
       - image: cimg/base:2020.01
     steps:
-      - checkout
       - run: echo "this is my text" > /~output.txt
       - persist_to_workspace:
           root: ~/
